@@ -28,7 +28,6 @@ class RecipesController < ApplicationController
     end
   end
 
-
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
