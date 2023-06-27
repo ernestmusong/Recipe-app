@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :recipe_foods
+  resources :recipes
+  resources :foods
+  resources :users
   devise_for :users, controllers: { sessions: 'users/sessions' }
 
   root 'users#index'
