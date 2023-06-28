@@ -3,10 +3,12 @@ class RecipeFoodsController < ApplicationController
 
   # GET /recipe_foods or /recipe_foods.json
   def index
-    @recipe_foods = RecipeFood.all
+    @recipe_foods = RecipeFood.all.includes(:recipe, :food)
   end
 
-  def show; end
+  def show
+    @recipe_food = RecipeFood.includes(:recipe, :food).find(params[:id])
+  end
 
   # GET /recipe_foods/new
   def new
@@ -53,7 +55,7 @@ class RecipeFoodsController < ApplicationController
   private
 
   def set_recipe_food
-    @recipe_food = RecipeFood.find(params[:id])
+    @recipe_food = RecipeFood.includes(:recipe, :food).find(params[:id])
   end
 
   def recipe_food_params
