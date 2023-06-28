@@ -1,7 +1,7 @@
 class ShoppingListsController < ApplicationController
   def index
-    @users = User.all
-    @user = User.find(params[:user_id])
-    @foods = Food.where.not(user_id: @user.id)
+    @users = User.all.includes(:foods)
+    @user = User.includes(:foods).find(params[:user_id])
+    @foods = Food.where.not(user_id: @user.id).includes(:user)
   end
 end
