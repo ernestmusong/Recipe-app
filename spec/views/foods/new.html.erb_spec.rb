@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'foods/new', type: :view do
   before(:each) do
     assign(:food, Food.new(
-                    name: 'MyString',
-                    measurement_unit: 'MyString',
+                    name: 'chiken',
+                    measurement_unit: 'gram',
                     price: 1,
                     quantity: 1,
                     user_id: 1
