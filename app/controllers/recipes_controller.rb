@@ -2,10 +2,13 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show edit update destroy]
 
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.all.includes(:user)
   end
 
-  def show; end
+  def show
+    @recipe_foods = @recipe.recipe_foods.includes(:food)
+    # @recipe = Recipe.includes(:user).find(params[:id])
+  end
 
   def new
     @recipe = Recipe.new
@@ -54,7 +57,7 @@ class RecipesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_recipe
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.includes(:user).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
