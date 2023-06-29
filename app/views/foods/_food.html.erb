@@ -23,5 +23,6 @@
     <strong>User ID:</strong>
     <%= food.user_id %>
   </p>
+  <%= button_to "Delete", user_food_path(user_id: food.user.id, id: food.id), method: :delete %>
 
 </div>
