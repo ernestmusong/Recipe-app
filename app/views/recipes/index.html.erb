@@ -1,14 +1,19 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Recipes page</h1>
+<h1>Recipes</h1>
 
 <div id="recipes">
-  <% @recipes.each do |recipe| %>
-    <%= render recipe %>
-    <p>
-      <%= link_to "Show this recipe", recipe %>
-    </p>
+  <% if @recipes.blank? %>
+    <p>Your recipes list is currently empty!</p>
+    <%= link_to "Add new recipe", new_user_recipe_path(current_user) %>
+  <% else %>
+    <% @recipes.each do |recipe| %>
+      <%= render recipe %>
+      <p>
+        <%= link_to "Show this recipe", recipe %>
+      </p>
+    <% end %>
+    <%= link_to "New recipe", new_user_recipe_path(current_user) %>
   <% end %>
 </div>
 
-<%= link_to "New recipe", new_recipe_path %>

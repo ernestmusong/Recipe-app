@@ -3,7 +3,6 @@ class Food < ApplicationRecord
   belongs_to :user
 
   attribute :quantity, :integer, default: 1
-  attribute :value, :interger
 
   validates :quantity, numericality: { greater_than: 0 }
   validates :price, numericality: { greater_than: 0 }

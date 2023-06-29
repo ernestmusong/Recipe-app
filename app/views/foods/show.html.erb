@@ -4,7 +4,7 @@
 
 <div>
   <%= link_to "Edit this food", edit_food_path(@food) %> |
-  <%= link_to "Back to foods", foods_path %>
+  <%= link_to "Back to foods", user_foods_path(current_user) %>
 
   <%= button_to "Destroy this food", @food, method: :delete %>
 </div>

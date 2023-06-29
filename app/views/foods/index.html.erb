@@ -3,12 +3,17 @@
 <h1>Foods</h1>
 
 <div id="foods">
-  <% @foods.each do |food| %>
-    <%= render food %>
-    <p>
-      <%= link_to "Show this food", food %>
-    </p>
-  <% end %>
+  <% if @foods.blank? %>
+    <p>Your food list is currently empty!</p>
+    <%= link_to "Add new food", new_user_food_path(current_user) %>
+  <% else %>
+    <% @foods.each do |food| %>
+      <%= render food %>
+      <p>
+        <%= link_to "Show this food", food %>
+      </p>
+    <% end %>
+    <%= link_to "New food", new_user_food_path(current_user) %>
+  <%end%>
 </div>
 
-<%= link_to "New food", new_food_path %>

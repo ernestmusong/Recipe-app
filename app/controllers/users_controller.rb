@@ -5,7 +5,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def show; end
+  def show
+    @user = User.find(params[:id])
+    @foods = @user.foods
+  end
 
   def new
     @user = User.new
@@ -18,7 +21,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
+        format.html { redirect_to user_foods_path(@user), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -48,6 +51,11 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def sign_out_user
+    sign_out current_user
+    redirect_to root_path
   end
 
   private
