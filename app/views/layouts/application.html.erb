@@ -20,6 +20,7 @@
           <%= link_to "New recipe", new_user_recipe_path(current_user), class: 'nav_link' %>
           <%= link_to 'Shopping list', user_shopping_lists_path(current_user), class: 'nav_link' %>
           <%= link_to "Logout", sign_out_user_path, method: :get, class: 'nav_link' %>
+          <%= link_to "Edit profile", edit_user_registration_path, method: :get, class: 'nav_link' %>
           <span class="nav_link"> Logged in as <strong><%= current_user.email %></strong></span>.
         <% else %>
           <%= link_to "Sign up", new_user_registration_path, :class => 'nav_link'  %>
