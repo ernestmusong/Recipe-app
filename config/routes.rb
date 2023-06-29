@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   
   resources :public_recipes, only: [:index]
   resources :users, only:[:index, :show, :edit, :update, :destroy] do
-    resources :recipes, only: [:index, :show, :edit, :create, :update, :destroy, :new] do
+    resources :recipes, only: [:index, :show, :edit, :create, :update, :destroy, :new, :toggle_public] do
       resources :recipe_foods, only: [:index, :show, :edit, :update, :destroy]
+      member do
+        patch 'toggle_public'
+      end
     end
     resources :foods, only: [:index, :show, :new, :edit, :create, :update, :destroy] do
       resources :recipe_foods, only: [:index, :show, :edit, :update, :destroy]

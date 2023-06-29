@@ -1,7 +1,17 @@
 <h1>New food</h1>
 
 <%= form_with model: @food, url: user_foods_path(current_user), method: :post do |form| %>
-  
+  <% if @food.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@food.errors.count, "error") %> prohibited the food from being saved:</h2>
+
+      <ul>
+        <% @food.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %
   <div>
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>

@@ -1,32 +1,10 @@
-<div id="<%= dom_id recipe %>">
-  <p>
-    <strong>Name Of Food:</strong>
-    <%= recipe.name %>
-  </p>
+  <li id="<%= dom_id recipe %>">
+    <%= link_to user_recipe_path(current_user, recipe) do %>
+      <div class="child">
+        <strong><%= recipe.name %></strong>
+        <% button_to "Remove", user_recipe_path(user_id: recipe.user.id, id: recipe.id), method: :delete %>
+      </div>
 
-  <p>
-    <strong>Preparation time:</strong>
-    <%= recipe.preparation_time %>
-  </p>
-
-  <p>
-    <strong>Cooking time:</strong>
-    <%= recipe.cooking_time %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= recipe.description %>
-  </p>
-
-  <p>
-    <strong>Public:</strong>
-    <%= recipe.public %>
-  </p>
-
-  <p>
-    <strong>User Id:</strong>
-    <%= recipe.user_id %>
-  </p>
-
-</div>
+      <p><%= recipe.description %></p>
+    <%end%>
+  </li>

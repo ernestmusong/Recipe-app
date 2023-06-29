@@ -1,13 +1,13 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: %i[show edit update destroy]
+  before_action :set_recipe, only: %i[show edit update destroy toggle_public]
 
   def index
     @recipes = Recipe.all.includes(:user)
   end
 
   def show
-    @recipe_foods = @recipe.recipe_foods.includes(:food)
-    # @recipe = Recipe.includes(:user).find(params[:id])
+    # @recipe_foods = @recipe.recipe_foods.includes(:food, :recipe)
+    @recipe = Recipe.includes(:user).find(params[:id])
   end
 
   def new
@@ -48,6 +48,11 @@ class RecipesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to user_recipes_path(current_user), notice: 'Recipe was successfully destroyed.' }
     end
+  end
+
+  def toggle_public
+    @recipe.toggle!(:public)
+    redirect_to user_recipe_path(current_user, @recipe) 
   end
 
   private
