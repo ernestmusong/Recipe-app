@@ -1,5 +1,5 @@
 <a name="readme-top"></a>
-  <h3><b>Blog app</b></h3>
+  <h3><b>Recipe App</b></h3>
 
 # 📗 Table of Contents
 
@@ -24,7 +24,7 @@
 
 # 📖 [Catalog of my things] <a name="about-project"></a>
 
-**[Catalog of my things]** Blog App is a web application that allows users to create, read, update, and delete blog posts. Users can sign up for an account, create new blog posts, and edit or delete their existing posts.
+**[Catalog of my things]** Recipe App is a web application that help users browse through a collection of recipes. Users are also allowed to sign up and create their own recipes as well as remove them.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -45,9 +45,16 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **[Add new post]**
-- **[Add new comment]**
-- **[Add new like]**
+- **[User sign up]**
+- **[User sign in]**
+- **[User logout]**
+- **[Recover password]**
+- **[Cancel user account]**
+- **[Add new food]**
+- **[Delet food item]**
+- **[Add new recipe]**
+- **[Edit recipe]**
+- **[Delete recipe]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -62,7 +69,7 @@ Ruby version >= 3.0.0
 Clone this repository to your desired folder:
 sh
   cd my-folder
- git clone https://github.com/ernestmusong/Blog-app.git
+ git clone https://github.com/ernestmusong/Recipe-app.git
 
  ### Install:
  Run: bundle install
@@ -86,18 +93,18 @@ sh
 - Twitter: [@MusongAkeh](https://twitter.com/MusongAkeh)
 - LinkedIn: [Musong Ernest](https://www.linkedin.com/in/musongernestakeh/)
 
-👤 **Oussama Elabdioui**
+👤 **Brhanu Hailu**
 
-- GitHub: [@codedit334](https://github.com/codedit334)
-- Twitter: [@oussedit](https://twitter.com/oussedit)
-- LinkedIn: [Oussama Elabdioui](https://www.linkedin.com/in/oussama-elabdioui-4677a41b6/)
+- GitHub: [@brhanuhailu](https://github.com/brhanuhailu)
+- Twitter: [@tigrayfurtune](https://twitter.com/TigrayCountry)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/brhanu-hailu-85578a246/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **[reply to a comment]**
-- [ ] **[Search for specific blog posts based on keywords or tags]**
+- [ ] **[Search recipe]**
+- [ ] **[Search food]**
  
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -105,7 +112,7 @@ sh
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/ernestmusong/Blog-app/issues).
+Feel free to check the [issues page](https://github.com/ernestmusong/Recipe-app/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
