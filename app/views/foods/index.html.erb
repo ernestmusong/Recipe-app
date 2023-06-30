@@ -1,19 +1,28 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Foods</h1>
-
-<div id="foods">
-  <% if @foods.blank? %>
-    <p>Your food list is currently empty!</p>
-    <%= link_to "Add new food", new_user_food_path(current_user) %>
-  <% else %>
+<main>
+    <h1 class="title">Foods</h1>
+    <% if @foods.blank? %>
+      <p>Your Food list is currently empty!</p>
+    <% else %>
+    <div class="food_btn_wrap">
+       <%= link_to "Add food", new_user_food_path(current_user), class: "add_btn" %>
+    </div>
+    <table class="tables">
+        <tr>
+          <th>Food</th>
+          <th>Measurement unit</th>
+          <th>Unit rice</th>
+          <th>Actions</th>
+       </tr>
     <% @foods.each do |food| %>
-      <%= render food %>
-      <p>
-        <%# <%= link_to "Show this food", food %> %>
-      </p>
+       <tr >
+  <td><%= food.name%></td>
+  <td><%= food.measurement_unit%></td>
+  <td>$<%= food.price%></td>
+  <td>
+    <%= link_to "Delete", user_food_path(user_id: food.user.id, id: food.id), class: "delete_btn", method: :delete %>
+  </td>
+</tr>
     <% end %>
-    <%= link_to "New food", new_user_food_path(current_user) %>
-  <%end%>
-</div>
-
+    </table>
+    <% end %>
+</main>

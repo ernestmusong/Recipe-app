@@ -37,6 +37,10 @@ h1 {
   text-align: center;
 }
 
+.notice {
+  color:#3e8e41
+}
+
 .notice_wrap {
   margin: 0 auto;
   padding: 5px;
@@ -294,6 +298,143 @@ form {
 
 .shared_links_wrap {
   text-align: center;
+}
+
+/* -----------------------------------------------Tables and lists--------------------- */
+
+.shopping_list_p {
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.tables {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+.tables th, 
+.tables td {
+  text-align: left;
+  padding: 16px;
+}
+
+.tables tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.public_recipes,
+.recipes {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.public_recipes .link,
+.recipes .link {
+  width: 100%;
+}
+
+.public_recipes li,
+.recipes li {
+  width: 100%;
+  border: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 2rem;
+}
+
+.child {
+  display: flex;
+  flex-direction: column;
+}
+
+.item h2,
+.item h4{
+  text-transform: capitalize;
+}
+
+#item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item p{
+  text-transform: capitalize;
+}
+
+.food_btn_wrap {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.add_btn,
+.delete_btn {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  border-color: #04AA6D;
+  color: green;
+  text-decoration: none;
+}
+
+.delete_btn {
+  border-color: #f44336;
+  color: red;
+}
+
+.delete_btn:hover {
+  background: #f44336;
+  color: white;
+}
+
+.add_btn:hover {
+  background-color: #04AA6D;
+  color: white;
+}
+
+article {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.toggle_div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.toggle_btn {
+ height: 20px;
+ display: flex;
+ align-items: center;
+}
+
+.title {
+  text-transform: uppercase;
+}
+
+#left,
+#right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 @media (min-width: 768px) {

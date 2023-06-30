@@ -1,35 +1,54 @@
-  <article>
-    <div id="left">
-      <p>
-        <strong>Name Of Food:</strong>
-        <%= @recipe.name %>
-      </p>
-
-      <p>
-        <strong>Preparation time:</strong>
-        <%= @recipe.preparation_time %>
-      </p>
-
-      <p>
-        <strong>Cooking time:</strong>
-        <%= @recipe.cooking_time %>
-      </p>
-
-      <p>
-        <strong>Description:</strong>
-        <%= @recipe.description %>
-      </p>
+  <main>
+    <h1 class="title"><%=@recipe.name%></h1>
+    <article>
+      <div id="left">
+        <p>
+          <strong>Preparation time:</strong>
+          <%= @recipe.preparation_time %> hour(s)
+        </p>
+        <p>
+          <strong>Cooking time:</strong>
+          <%= @recipe.cooking_time %> hour(s)
+        </p>
+        <p>
+          <strong>Description:</strong>
+          <%= @recipe.description %>
+        </p>
+      </div>
       <% if user_signed_in? %>
-          <%= link_to "Add new food", new_user_food_path(current_user), method: :get, class: 'nav_link'%>
-      
-      </div>
-      
-    <div class="right">
-      <div class="toggle_div">
-        <p><strong>Public:</strong></p>
-        <%= button_to (@recipe.public ? 'Public' : 'Private'), toggle_public_user_recipe_path(current_user, @recipe),  method: :patch %>
-      </div>
-      <%= link_to "Edit this recipe",  edit_user_recipe_path(current_user, @recipe) %>
-    </div>
-  <% end %>
-</article>
+        <div id="right">
+          <div class="toggle_div">
+            <%= form_with(url: toggle_public_user_recipe_path(current_user, @recipe), method: :patch, class: 'toggle_btn') do |form| %>
+              <%= form.button(type: :submit) do %>
+                <%= @recipe.public ? 'Make this recipe private' : 'Make this recipe public' %>
+               <% end %>
+            <% end %>
+
+            <%# <%= button_to (@recipe.public ? 'Public' : 'Private'), toggle_public_user_recipe_path(current_user, @recipe),  method: :patch %>
+          </div>
+          <%= link_to "Add new food", new_user_food_path(current_user), method: :get%>
+        </div>
+    <% end %>
+    </article>
+    <table class="tables">
+          <tr>
+            <th>Food</th>
+            <th>Quantity</th>
+            <th>Value</th>
+            <th>Actions</th>
+        </tr>
+      <% @foods.each do |food| %>
+        <tr >
+          <td><%= food.name%></td>
+          <td><%= food.quantity%></td>
+          <td>$<%= @foods.sum { |food| food.price * food.quantity } %></td>
+          <% if user_signed_in? %>
+            <td id="modify">
+              <%= link_to "Modify", edit_user_food_path(current_user, food) %>
+              <%= link_to "Remove", user_food_path(current_user, food), method: :delete %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </main>

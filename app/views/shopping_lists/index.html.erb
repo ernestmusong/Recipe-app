@@ -1,20 +1,18 @@
 <main>
-    <h1>Shopping List</h1>
+    <h1 class="title">Shopping List</h1>
     <% if @foods.blank? %>
     <p>Your shopping list is currently empty!</p>
     <% else %>
     <div class="shopping_list_p">
-        <p>Amount of food items to buy: <%= @foods.count%></p>
-        <p>Total value of food needed: $<%= @foods.sum { |food| food.price * food.quantity } %></p>
+        <p>Amount of food items to buy: <strong><%= @foods.count%></strong></p>
+        <p>Total value of food needed: <strong>$<%= @foods.sum { |food| food.price * food.quantity } %></strong></p>
     </div>
-    <table className="table table-bordered  ">
-      <thead>
+    <table class="tables">
         <tr>
-          <th scope="col">Food</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Price</th>
+          <th>Food</th>
+          <th>Quantity</th>
+          <th>Price</th>
        </tr>
-       <tbody>
     <% @foods.each do |food| %>
        <tr>
          <td><%= food.name%></td>
@@ -22,8 +20,6 @@
          <td>$<%= food.price%></td>
        </tr>
     <% end %>
-    </tbody>
-      </thead>
     </table>
     <% end %>
 </main>

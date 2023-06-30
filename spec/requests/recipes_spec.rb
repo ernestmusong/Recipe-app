@@ -1,115 +1,69 @@
 require 'rails_helper'
 
-RSpec.describe '/recipes', type: :request do
-  let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+RSpec.describe 'Recipes', type: :request do
+  before(:each) do
+    @user = User.create(name: 'Test user', email: 'test444@gmail.com', password: '123456',
+                        password_confirmation: '123456', confirmation_token: nil, confirmed_at: Time.now)
+    @recipe = Recipe.create(name: 'Test recipe', preparation_time: 10.2, cooking_time: 20.3,
+                            description: 'Test description', public: true, user_id: @user.id)
+    @recipe_two = Recipe.create(name: 'Test recipe Two', preparation_time: 10.2, cooking_time: 20.3,
+                                description: 'Test description two', public: true, user_id: @user.id)
+    post user_session_path params: { user: { email: @user.email, password: @user.password } }
   end
-
-  let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
-  end
-
-  describe 'GET /index' do
-    it 'renders a successful response' do
-      Recipe.create! valid_attributes
-      get recipes_url
-      expect(response).to be_successful
+  describe 'GET /public recipe' do
+    it 'returns http success' do
+      get public_recipes_path
+      expect(response).to have_http_status(200)
     end
-  end
-
-  describe 'GET /show' do
-    it 'renders a successful response' do
-      recipe = Recipe.create! valid_attributes
-      get recipe_url(recipe)
-      expect(response).to be_successful
+    it 'renders the index template' do
+      get public_recipes_path
+      expect(response).to render_template('index')
     end
-  end
-
-  describe 'GET /new' do
-    it 'renders a successful response' do
-      get new_recipe_url
-      expect(response).to be_successful
+    it 'displays the recipe name' do
+      get public_recipes_path
+      expect(response.body).to include(@user.recipes.first.name)
     end
   end
-
-  describe 'GET /edit' do
-    it 'renders a successful response' do
-      recipe = Recipe.create! valid_attributes
-      get edit_recipe_url(recipe)
-      expect(response).to be_successful
+  describe 'GET /recipes/' do
+    it 'returns http success' do
+      get user_recipes_path(@user)
+      expect(response).to have_http_status(200)
+    end
+    it 'render the index template' do
+      get user_recipes_path(@user)
+      expect(response).to render_template('index').or(render_template('recipes/index'))
+    end
+    it 'displays the recipe name' do
+      get user_recipes_path(@user)
+      expect(response.body).to include(@user.recipes.first.name)
     end
   end
-
-  describe 'POST /create' do
-    context 'with valid parameters' do
-      it 'creates a new Recipe' do
-        expect do
-          post recipes_url, params: { recipe: valid_attributes }
-        end.to change(Recipe, :count).by(1)
-      end
-
-      it 'redirects to the created recipe' do
-        post recipes_url, params: { recipe: valid_attributes }
-        expect(response).to redirect_to(recipe_url(Recipe.last))
-      end
+  describe 'GET /recipes/new' do
+    it 'returns http success' do
+      get new_user_recipe_path(@user)
+      expect(response).to have_http_status(200)
     end
-
-    context 'with invalid parameters' do
-      it 'does not create a new Recipe' do
-        expect do
-          post recipes_url, params: { recipe: invalid_attributes }
-        end.to change(Recipe, :count).by(0)
-      end
-
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post recipes_url, params: { recipe: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
+    it 'renders the new template' do
+      get new_user_recipe_path(@user)
+      expect(response).to render_template('new')
+    end
+    it 'displays the new recipe form' do
+      get new_user_recipe_path(@user)
+      expect(response.body).to include('Add New recipe')
     end
   end
-
-  describe 'PATCH /update' do
-    context 'with valid parameters' do
-      let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
-      end
-
-      it 'updates the requested recipe' do
-        recipe = Recipe.create! valid_attributes
-        patch recipe_url(recipe), params: { recipe: new_attributes }
-        recipe.reload
-        skip('Add assertions for updated state')
-      end
-
-      it 'redirects to the recipe' do
-        recipe = Recipe.create! valid_attributes
-        patch recipe_url(recipe), params: { recipe: new_attributes }
-        recipe.reload
-        expect(response).to redirect_to(recipe_url(recipe))
-      end
+  describe 'GET /recipes/:id' do
+    it 'returns http success' do
+      get user_recipe_path(@user, @recipe)
+      expect(response).to have_http_status(200)
     end
-
-    context 'with invalid parameters' do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        recipe = Recipe.create! valid_attributes
-        patch recipe_url(recipe), params: { recipe: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
+    it 'renders the show template' do
+      get user_recipe_path(@user, @recipe)
+      expect(response).to render_template('show')
     end
-  end
-
-  describe 'DELETE /destroy' do
-    it 'destroys the requested recipe' do
-      recipe = Recipe.create! valid_attributes
-      expect do
-        delete recipe_url(recipe)
-      end.to change(Recipe, :count).by(-1)
-    end
-
-    it 'redirects to the recipes list' do
-      recipe = Recipe.create! valid_attributes
-      delete recipe_url(recipe)
-      expect(response).to redirect_to(recipes_url)
+    it 'displays the recipe name' do
+      get user_recipe_path(@user, @recipe)
+      expect(response.body).to include(@recipe.name)
     end
   end
 end

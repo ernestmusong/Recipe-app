@@ -2,11 +2,11 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show edit update destroy toggle_public]
 
   def index
-    @recipes = Recipe.all.includes(:user)
+    @recipes = Recipe.includes(:user)
   end
 
   def show
-    # @recipe_foods = @recipe.recipe_foods.includes(:food, :recipe)
+    @foods = current_user.foods
     @recipe = Recipe.includes(:user).find(params[:id])
   end
 
@@ -52,7 +52,7 @@ class RecipesController < ApplicationController
 
   def toggle_public
     @recipe.toggle!(:public)
-    redirect_to user_recipe_path(current_user, @recipe) 
+    redirect_to user_recipe_path(current_user, @recipe)
   end
 
   private

@@ -5,11 +5,11 @@ class FoodsController < ApplicationController
     @foods = Food.all
   end
 
-  def show; end
-
   def new
     @food = Food.new
   end
+
+  def show; end
 
   def edit; end
 
@@ -30,11 +30,9 @@ class FoodsController < ApplicationController
   def update
     respond_to do |format|
       if @food.update(food_params)
-        format.html { redirect_to food_url(@food), notice: 'Food was successfully updated.' }
-        format.json { render :show, status: :ok, location: @food }
+        format.html { redirect_to user_foods_path(current_user), notice: 'Food was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @food.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,7 +42,6 @@ class FoodsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to user_foods_path(current_user), notice: 'Food was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

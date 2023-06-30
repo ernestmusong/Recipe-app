@@ -1,8 +1,13 @@
-  <li id="<%= dom_id recipe %>">
-    <%= link_to user_recipe_path(current_user, recipe) do %>
+  <li id="item">
+    <%= link_to user_recipe_path(current_user, recipe), class: "link" do %>
       <div class="child">
         <strong><%= recipe.name %></strong>
-        <% button_to "Remove", user_recipe_path(user_id: recipe.user.id, id: recipe.id), method: :delete %>
+        <%= form_with(url: user_recipe_path(user_id: recipe.user.id, id: recipe.id), method: :delete, class: 'toggle_btn') do |form| %>
+              <%= form.button(type: :submit) do %>
+                <%'Remove' %>
+               <% end %>
+        <% end %>
+        <%# <%= button_to "Remove", user_recipe_path(user_id: recipe.user.id, id: recipe.id), method: :delete %>
       </div>
 
       <p><%= recipe.description %></p>

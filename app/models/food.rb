@@ -4,6 +4,8 @@ class Food < ApplicationRecord
 
   attribute :quantity, :integer, default: 1
 
+  validates :measurement_unit, presence: true
+  validates :name, presence: true
   validates :quantity, numericality: { greater_than: 0 }
   validates :price, numericality: { greater_than: 0 }
 

@@ -1,10 +1,33 @@
 <h1>Edit the Food </h1>
 
-<%= render "form", food: @food %>
+<%= form_with model: @food, url: user_food_path(current_user, @food), method: :put do |form| %>
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :measurement_unit, style: "display: block" %>
+    <%= form.text_field :measurement_unit %>
+  </div>
+
+  <div>
+    <%= form.label :price, style: "display: block" %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div>
+    <%= form.label :quantity, style: "display: block" %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
 
 <br>
 
 <div>
-  <%= link_to "Show this food", @food %> |
   <%= link_to "Back to foods", user_foods_path(current_user) %>
 </div>
