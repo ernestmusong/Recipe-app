@@ -2,12 +2,12 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show edit update destroy toggle_public]
 
   def index
-    @recipes = Recipe.includes(:user)
+    @recipes = User.includes(:foods).find(params[:user_id]).recipes
   end
 
   def show
-    @foods = current_user.foods
     @recipe = Recipe.includes(:user).find(params[:id])
+    @foods = @recipe.user.foods
   end
 
   def new
