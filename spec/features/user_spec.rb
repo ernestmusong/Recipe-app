@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :feature do
   before(:each) do
-    @user = User.create(name: 'Test user', email: 'test@gmail.com', password: '123', password_confirmation: '123456',
+    @user = User.create(name: 'Test user', email: 'tes@gmail.com', password: '1234567', password_confirmation: '123456',
                         confirmation_token: nil)
   end
   describe 'sign in page' do
@@ -27,12 +27,12 @@ RSpec.describe 'Users', type: :feature do
       visit new_user_session_path
       expect(page).to have_link('Forgot your password?')
     end
-    scenario 'when user signs in with valid credential it will redirect to recipe page' do
+    scenario 'when user signs in, it will redirect to public recipes page' do
       visit new_user_session_path
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: @user.password
       click_button 'Log in'
-      expect(page).to have_content('Signed in successfully')
+      expect(page).to have_content('Public recipes')
     end
     scenario 'when user signs in with invalid credential it will redirect to sign in page' do
       visit new_user_session_path
