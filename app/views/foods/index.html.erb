@@ -1,7 +1,8 @@
 <main>
     <h1 class="title">Foods</h1>
     <% if @foods.blank? %>
-      <p>Your Food list is currently empty!</p>
+      <p>Your Food list is currently empty!</p><br>
+       <%= link_to "Add food", new_user_food_path(current_user), class: "add_btn" %>
     <% else %>
     <div class="food_btn_wrap">
        <%= link_to "Add food", new_user_food_path(current_user), class: "add_btn" %>
