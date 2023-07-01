@@ -1,0 +1,29 @@
+<main>
+    <h1 class="title">Foods</h1>
+    <% if @foods.blank? %>
+      <p>Your Food list is currently empty!</p><br>
+       <%= link_to "Add food", new_user_food_path(current_user), class: "add_btn" %>
+    <% else %>
+    <div class="food_btn_wrap">
+       <%= link_to "Add food", new_user_food_path(current_user), class: "add_btn" %>
+    </div>
+    <table class="tables">
+        <tr>
+          <th>Food</th>
+          <th>Measurement unit</th>
+          <th>Unit rice</th>
+          <th>Actions</th>
+       </tr>
+    <% @foods.each do |food| %>
+       <tr >
+  <td><%= food.name%></td>
+  <td><%= food.measurement_unit%></td>
+  <td>$<%= food.price%></td>
+  <td>
+    <%= link_to "Delete", user_food_path(user_id: food.user.id, id: food.id), class: "delete_btn", method: :delete %>
+  </td>
+</tr>
+    <% end %>
+    </table>
+    <% end %>
+</main>
